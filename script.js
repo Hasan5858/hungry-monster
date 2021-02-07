@@ -12,22 +12,32 @@ document.getElementById('searchBtn').addEventListener('click', () => {
     const mealContainer = document.getElementById('meal-container');
     const notifyDiv = document.getElementById('notify');
     const mealName = document.getElementById('input-meal').value;
-    // document.childNodes
-    const apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`;
-    const rceiveData = loadItem(apiUrl);
+    
+    const apiUrl = '';
+    if (mealName.length > 1) {
+        const apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`;
+        rceiveData = loadItem(apiUrl);
+    }else{
+
+        const apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?f=${mealName}`;
+        rceiveData = loadItem(apiUrl);
+    }
 
     rceiveData.then(data => {
         if (data.meals) {
-            const meal = data.meals[0];
-            const div = document.createElement('div');
-            div.setAttribute('class', 'col-md-3')
-            div.innerHTML = `
-            <div class="card meal-item" style="width: 17rem;">
-                <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
-                <input type="hidden" value="${meal.idMeal}">
-                <h5 class="card-text"> ${meal.strMeal}</h5>
-            </div>`;
-            mealContainer.appendChild(div);
+            const meals = data.meals;
+            meals.forEach(meal => {
+                
+                const div = document.createElement('div');
+                div.setAttribute('class', 'col-md-3')
+                div.innerHTML = `
+                <div class="card meal-item" style="width: 17rem;">
+                    <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
+                    <input type="hidden" value="${meal.idMeal}">
+                    <h5 class="card-text"> ${meal.strMeal}</h5>
+                </div>`;
+                mealContainer.appendChild(div);
+            });
         } else {
             const div = document.createElement('div');
             div.setAttribute('class', 'col-md-3')
