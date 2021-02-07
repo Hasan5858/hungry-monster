@@ -36,3 +36,6 @@ h5.card-text {
 .ingresient-img{
     width: 5%;
 }
+.notify-section{
+    display: none;
+}

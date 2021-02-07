@@ -12,7 +12,6 @@ document.getElementById('searchBtn').addEventListener('click', () => {
     const mealContainer = document.getElementById('meal-container');
     const notifyDiv = document.getElementById('notify');
     const mealName = document.getElementById('input-meal').value;
-    
     const apiUrl = '';
     if (mealName.length > 1) {
         const apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`;
@@ -27,9 +26,9 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         if (data.meals) {
             const meals = data.meals;
             meals.forEach(meal => {
-                
+                mealContainer.innerHTML = '';
                 const div = document.createElement('div');
-                div.setAttribute('class', 'col-md-3')
+                div.setAttribute('class', 'col-md-3');
                 div.innerHTML = `
                 <div class="card meal-item" style="width: 17rem;">
                     <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
@@ -37,16 +36,10 @@ document.getElementById('searchBtn').addEventListener('click', () => {
                     <h5 class="card-text"> ${meal.strMeal}</h5>
                 </div>`;
                 mealContainer.appendChild(div);
+                notifyDiv.style.display = 'none';
             });
         } else {
-            const div = document.createElement('div');
-            div.setAttribute('class', 'col-md-3')
-            div.innerHTML = `
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                Sorry! <strong>${mealName} </strong> not available.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>`;
-            notifyDiv.appendChild(div);
+            notifyDiv.style.display = 'block';
         }
     });
 
