@@ -20,6 +20,18 @@ body{
     margin-top: 50px;
 }
 
+.alert-size{
+    width: 15rem;
+    height: 3.5rem;
+    margin: auto;
+}
+
+.card-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .meal-item{
     cursor: pointer;
     margin-bottom: 20px;

@@ -26,7 +26,6 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         if (data.meals) {
             const meals = data.meals;
             meals.forEach(meal => {
-                mealContainer.innerHTML = '';
                 const div = document.createElement('div');
                 div.setAttribute('class', 'col-md-3');
                 div.innerHTML = `
